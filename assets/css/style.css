@@ -14,4 +14,12 @@ body {
   .task-card:hover {
     cursor: grab;
   }
+
+  .dark-mode{
+    background-color: #555;
+    color: #ebeae8;
+  }
   
+  .dark-mode div.dark{
+    color:black;
+  }
