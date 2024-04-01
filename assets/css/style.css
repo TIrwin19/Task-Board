@@ -15,6 +15,10 @@ body {
     cursor: grab;
   }
 
+  /* .new-task{
+    
+  } */
+ 
   .dark-mode{
     background-color: #555;
     color: #ebeae8;
@@ -23,3 +27,14 @@ body {
   .dark-mode div.dark{
     color:black;
   }
+
+  .dark-mode form{
+    color: black
+  }
+
+  .dark-mode #formLabel{
+    color: black
+  }
+
+
+
