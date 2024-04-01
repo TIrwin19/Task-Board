@@ -6,15 +6,9 @@ This webpage is a task board I made for the Rutgers coding bootcamp. The assignm
 
 ## Visuals
 
-<img src="./assets/images/" >
+<img src="./assets/images/task_1.png" >
 
-<img src="./assets/images/" >
-
-<img src="./assets/images/" >
-
-<img src="./assets/images/" >
-
-<img src="./assets/images/" >
+<img src="./assets/images/task_2.png" >
 
 ## Deployment
 
