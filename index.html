@@ -19,7 +19,7 @@
   <header class="p-4 mb-4 text-center border-bottom border-5">
     <h1 class="display-3">Task Board</h1>
     <p class="lead">A simple Kanban board for task management</p>
-    <!-- <button class="rounded-pill bg-dark text-light border border-white" id="toggle">Dark Mode</button> -->
+    <button class="rounded-pill bg-dark text-light border border-white" id="toggle">Dark Mode</button>
   </header>
   <main>
     <div class="container">
@@ -52,7 +52,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button id="submit" type="submit" class="btn btn-primary">Save changes</button>
+              <button id="submit" type="submit" class="btn btn-primary">Add Task</button>
             </div>
           </div>
         </div>
@@ -66,9 +66,7 @@
               <h2 class="card-title mb-1">To Do</h2>
             </div>
             <div class="card-body bg-light">
-              <div id="todo-cards">
-               
-              </div>
+              <div id="todo-cards" class="lanes"></div>
             </div>
           </div>
         </div>
@@ -78,7 +76,7 @@
               <h2 class="card-title mb-1">In Progress</h2>
             </div>
             <div class="card-body bg-light">
-              <div id="in-progress-cards"></div>
+              <div id="in-progress-cards" class="lanes"></div>
             </div>
           </div>
         </div>
@@ -88,7 +86,7 @@
               <h2 class="card-title mb-1">Done</h2>
             </div>
             <div class="card-body bg-light">
-              <div id="done-cards"></div>
+              <div id="done-cards" class="lanes"></div>
             </div>
           </div>
         </div>
@@ -103,7 +101,6 @@
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-
   <script src="./assets/js/script.js"></script>
 </body>
 

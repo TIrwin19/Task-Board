@@ -15,10 +15,10 @@ body {
     cursor: grab;
   }
 
-  .new-task{
+  /* .new-task{
     
-  }
-
+  } */
+ 
   .dark-mode{
     background-color: #555;
     color: #ebeae8;
