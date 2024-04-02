@@ -22,11 +22,11 @@ function generateTaskId() {
 // Todo: create a function to create a task card
 function createTaskCard(task, index) {
     const newTaskCard = (`
-    <div data-task='${task.id}' data-index='${index}' data-status='${task.status}' class="new-task my-4 p-3 rounded-5 border border-dark-subtle shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <div data-index='${index}' data-task='${task.id}' data-status='${task.status}' class="new-task my-4 p-3 rounded-5 border border-dark-subtle shadow-lg p-3 mb-5 bg-body-tertiary rounded">
         <h2 class="task-title">${task.taskTitle}</h2>
         <p class="task-date">${task.description}</p>
         <p id="date-color" class="task-desc">Due: ${task.dueDate}</p>
-        <button class="delete-task-btn rounded btn btn-outline-light bg-danger bg-gradient">Delete</button>
+        <button data-task='${task.id}' class="delete-task-btn rounded btn btn-outline-light bg-danger bg-gradient">Delete</button>
     </div>
     `)
     return newTaskCard
@@ -40,24 +40,24 @@ function renderTaskList() {
     taskList.forEach(function(task, index){
         const newTaskCard = createTaskCard(task, index)
         const todoLane = $('#todo-cards')
-        todoLane.append(newTaskCard)
+        // todoLane.append(newTaskCard)
 
-        // if (task.status === 'to-do') {
-        //     todoLane.append(newTaskCard)
-        // } else if (task.status === 'in-progress') {
-        //     inProgressLane.append(newTaskCard)
-        // } else {
-        //     doneLane.append(newTaskCard)
-        // }
-
-        const newTask = $('.new-task')
-        if(dayjs().isAfter(task.dueDate, 'day')) {
-            newTask.addClass('bg-danger')
-        } else if (dayjs().isSame(task.dueDate, 'day')) {
-            newTask.addClass('bg-warning text-dark')
+        if (task.status === 'to-do') {
+            todoLane.append(newTaskCard)
+        } else if (task.status === 'in-progress') {
+            inProgressLane.append(newTaskCard)
         } else {
-            newTask.addClass('bg-light text-dark')
+            doneLane.append(newTaskCard)
         }
+
+        // const newTask = $('.new-task')
+        // if(dayjs().isAfter(task.dueDate, 'day')) {
+        //     newTask.addClass('bg-danger')
+        // } else if (dayjs().isSame(task.dueDate, 'day')) {
+        //     newTask.addClass('bg-warning text-dark')
+        // } else {
+        //     newTask.addClass('bg-light text-dark')
+        // }
     })
 
     const deleteTask = $('.delete-task-btn')
@@ -69,7 +69,11 @@ function setupDrag(els) {
         revert: true,
         containment: 'document',
         opacity: 0.5,
-        zIndex: 100
+        zIndex: 100,
+        // helper: function(eventObj){
+        //     console.log(eventObj.target)
+        //     return $(eventObj.target)
+        // }
     })
 }
 
@@ -87,9 +91,10 @@ function handleAddTask(e) {
     const newTaskObj = {
         id: uniqueId,
         taskTitle: taskNameValue,
-        // dueDate: dayjs(dueDateValue).format('MMM D, YYYY'),
-        dueDate: dueDateValue,
-        description: descriptionValue
+        dueDate: dayjs(dueDateValue).format('MMM D, YYYY'),
+        // dueDate: dueDateValue,
+        description: descriptionValue,
+        status: 'to-do'
     }
     console.log(dueDateValue)
     
@@ -117,27 +122,30 @@ function handleDeleteTask(event) {
 
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop() {
-    $('#todo-cards, #in-progress-cards, #done-cards').droppable({
+    $('.card-body').droppable({
         accept: '.new-task',
         drop: function(eventObj, ui) {
             const lane = $(eventObj.target)
             const newCard = $(ui.draggable[0])
-            const index = $('.new-task').data('task')
+            const index = newCard.data('task')
 
-            newTaskCard.css({
+            console.log('index', newCard)
+            
+            newCard.css({
                 position: 'relative',
                 top: 0,
                 left: 0
             })
+
             lane.append(newCard)
 
             const taskArray = taskObjectArray()
 
             const taskObj = taskArray[index]
 
-            if (lane.hasClass('todo-cards')) {
+            if (lane.hasClass('.todo-cards')) {
                 taskObj.status = 'to-do'
-            } else if (lane.hasClass('in-progress-cards')) {
+            } else if (lane.hasClass('.in-progress-cards')) {
                 taskObj.status = 'in-progress'
             } else {
                 taskObj.status = 'done'
@@ -151,9 +159,10 @@ function handleDrop() {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
-    handleDrop()
     renderTaskList()
+    console.log($('.new-task'))
     setupDrag($('.new-task'))
+    handleDrop()
     const submitBtn =  $('#submit')
     // taskForm.on('submit', handleAddTask)
     submitBtn.on('click', function(e) {
