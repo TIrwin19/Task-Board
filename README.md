@@ -12,7 +12,7 @@ This webpage is a task board I made for the Rutgers coding bootcamp. The assignm
 
 ## Deployment
 
-Provided as a link here - 
+Provided as a link here - https://tirwin19.github.io/Task-Board/
 
 ## Usage
 
